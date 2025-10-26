@@ -2,7 +2,6 @@ const btn = document.getElementById("checkBtn");
 const input = document.getElementById("userInput");
 const result = document.getElementById("result");
 
-// Using the free LanguageTool API without API key (limited but works)
 const API_URL = "https://api.languagetool.org/v2/check";
 
 btn.addEventListener("click", async () => {
@@ -35,7 +34,6 @@ btn.addEventListener("click", async () => {
             let corrected = original;
             let issues = [];
             
-            // Apply corrections from end to beginning to avoid position issues
             const sortedMatches = [...data.matches].sort((a, b) => b.offset - a.offset);
             
             sortedMatches.forEach(match => {
@@ -44,7 +42,6 @@ btn.addEventListener("click", async () => {
                     const start = match.offset;
                     const end = match.offset + match.length;
                     
-                    // Only apply if replacement makes sense
                     if (replacement && replacement.length > 1 && replacement !== 'ie') {
                         corrected = corrected.substring(0, start) + replacement + corrected.substring(end);
                         issues.push({
